@@ -1,12 +1,12 @@
 package example
 
-class Person(val firstName:String, val lastName:String)
+case class Person(firstName:String, lastName:String)
 
 /* Companion object like static util in Java */
 object Person {
-	def apply(name:String) = {
+	def apply(name:String):Person = {
 		val first = name.split(" ")(0)
 		val last = name.split(" ")(1)
-		new Person(first, last)
+		apply(first, last)
 	}
 } 

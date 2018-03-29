@@ -1,17 +1,17 @@
 package counter
 
-class Counter(val num: Int) {
+case class Counter(num: Int = 0) { 
     def get = num
 
-    def inc = new Counter(num + 1)
+    def inc = copy(num = num + 1)
     def inc(index: Int = 1):Counter = {
-        new Counter(num + index)
+        copy(num + index)
     }
 
-    def dec = new Counter(num + 1)
+    def dec = copy(num + 1)
     def dec(index: Int = 1):Counter = {
         /* Generate extra objects??? */
-        new Counter(num - index)
+        copy(num - index)
     }
 
     override def toString = {
