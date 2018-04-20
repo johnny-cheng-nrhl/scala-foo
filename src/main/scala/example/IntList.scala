@@ -1,6 +1,5 @@
 package example
 
-
 import scala.annotation._
 
 sealed trait IntList {
