@@ -1,5 +1,5 @@
 sealed trait Expression {
-  def eval: Double = 
+  def eval: Calculation = 
     this match {
       case Addition(l, r) => 
         l.eval match {
@@ -10,7 +10,15 @@ sealed trait Expression {
               case Success(r2) => Success(r1 + r2) 
             }
         }
-      case Subtraction(l, r) => l.eval - r.eval
+      case Subtraction(l, r) => 
+        l.eval match {
+          case Failure(reason) => Failure(reason)
+          case Success(r1) =>
+            r.eval match {
+              case Failure(reason) => Failure(reason)
+              case Success(r2) => Success(r1 - r2) 
+            }
+        }
       case Division(l, r) => l.eval / r.eval
       case SquareRoot(v) => v.eval * v.eval
       case Number(v) => v
